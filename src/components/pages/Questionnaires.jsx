@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
-import Card from "@/components/atoms/Card";
-import Button from "@/components/atoms/Button";
+import React, { useEffect, useState } from "react";
+import { questionnairesService } from "@/services/api/questionnaires";
+import { format } from "date-fns";
+import { toast } from "react-toastify";
+import ApperIcon from "@/components/ApperIcon";
+import QuestionnaireBuilder from "@/components/organisms/QuestionnaireBuilder";
 import SearchBar from "@/components/molecules/SearchBar";
 import Loading from "@/components/ui/Loading";
 import Error from "@/components/ui/Error";
 import Empty from "@/components/ui/Empty";
-import ApperIcon from "@/components/ApperIcon";
-import { questionnairesService } from "@/services/api/questionnaires";
-import { format } from "date-fns";
-import { toast } from "react-toastify";
+import Button from "@/components/atoms/Button";
+import Card from "@/components/atoms/Card";
 
 const Questionnaires = () => {
   const [questionnaires, setQuestionnaires] = useState([]);
@@ -25,8 +26,8 @@ const Questionnaires = () => {
 
   useEffect(() => {
 const filtered = questionnaires.filter(q =>
-      q.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      q.description?.toLowerCase().includes(searchTerm.toLowerCase())
+      q.title_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      q.description_c?.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredQuestionnaires(filtered);
   }, [questionnaires, searchTerm]);
@@ -73,7 +74,7 @@ const filtered = questionnaires.filter(q =>
 const original = await questionnairesService.getById(id);
       const duplicate = {
         ...original,
-        title: `${original.title} (Copy)`,
+        title_c: `${original.title_c} (Copy)`,
         Id: undefined
       };
       const created = await questionnairesService.create(duplicate);
@@ -86,15 +87,15 @@ const original = await questionnairesService.getById(id);
 
   const handleToggleStatus = async (id) => {
     try {
-      const questionnaire = questionnaires.find(q => q.Id === id);
+const questionnaire = questionnaires.find(q => q.Id === id);
       const updated = await questionnairesService.update(id, {
         ...questionnaire,
-        isActive: !questionnaire.isActive
+        is_active_c: !questionnaire.is_active_c
       });
-      setQuestionnaires(prev =>
+setQuestionnaires(prev =>
         prev.map(q => q.Id === id ? updated : q)
       );
-      toast.success(`Questionnaire ${updated.isActive ? 'activated' : 'deactivated'}`);
+      toast.success(`Questionnaire ${updated.is_active_c ? 'activated' : 'deactivated'}`);
     } catch (error) {
       toast.error("Failed to update questionnaire status");
     }
@@ -177,29 +178,29 @@ const original = await questionnairesService.getById(id);
             <Card key={questionnaire.Id} hover className="p-6">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
-                  <div className="flex items-center space-x-2 mb-2">
+<div className="flex items-center space-x-2 mb-2">
                     <h3 className="text-lg font-semibold text-gray-900">
-                      {questionnaire.title}
+                      {questionnaire.title_c}
                     </h3>
                     <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                      questionnaire.isActive
+                      questionnaire.is_active_c
                         ? "bg-green-100 text-green-800"
                         : "bg-gray-100 text-gray-800"
                     }`}>
-                      {questionnaire.isActive ? "Active" : "Inactive"}
+                      {questionnaire.is_active_c ? "Active" : "Inactive"}
                     </span>
                   </div>
-                  <p className="text-gray-600 text-sm mb-3">
-                    {questionnaire.description}
+<p className="text-gray-600 text-sm mb-3">
+                    {questionnaire.description_c}
                   </p>
                   <div className="flex items-center space-x-4 text-sm text-gray-500">
                     <div className="flex items-center space-x-1">
                       <ApperIcon name="FileQuestion" size={16} />
                       <span>{questionnaire.questions?.length || 0} questions</span>
                     </div>
-                    <div className="flex items-center space-x-1">
+<div className="flex items-center space-x-1">
                       <ApperIcon name="Calendar" size={16} />
-                      <span>{format(new Date(questionnaire.createdAt), "MMM d, yyyy")}</span>
+                      <span>{format(new Date(questionnaire.created_at_c), "MMM d, yyyy")}</span>
                     </div>
                   </div>
                 </div>
@@ -229,11 +230,11 @@ const original = await questionnairesService.getById(id);
                   <Button
                     variant="ghost"
                     size="sm"
-                    icon={questionnaire.isActive ? "Pause" : "Play"}
+icon={questionnaire.is_active_c ? "Pause" : "Play"}
                     onClick={() => handleToggleStatus(questionnaire.Id)}
-                    className={questionnaire.isActive ? "text-orange-600 hover:text-orange-700" : "text-green-600 hover:text-green-700"}
+                    className={questionnaire.is_active_c ? "text-orange-600 hover:text-orange-700" : "text-green-600 hover:text-green-700"}
                   >
-                    {questionnaire.isActive ? "Deactivate" : "Activate"}
+                    {questionnaire.is_active_c ? "Deactivate" : "Activate"}
                   </Button>
                   <Button
                     variant="ghost"

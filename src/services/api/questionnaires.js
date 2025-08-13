@@ -18,10 +18,14 @@ class QuestionnairesService {
     }
   }
 
-  async getAll() {
+async getAll() {
     try {
-      if (!this.apperClient) this.initializeApperClient();
-
+      if (!this.apperClient) {
+        this.initializeApperClient();
+        if (!this.apperClient) {
+          throw new Error('Failed to initialize Apper client');
+        }
+      }
       const params = {
         fields: [
           { field: { Name: "Name" } },
@@ -60,10 +64,14 @@ class QuestionnairesService {
     }
   }
 
-  async getQuestionsByQuestionnaire(questionnaireId) {
+async getQuestionsByQuestionnaire(questionnaireId) {
     try {
-      if (!this.apperClient) this.initializeApperClient();
-
+      if (!this.apperClient) {
+        this.initializeApperClient();
+        if (!this.apperClient) {
+          throw new Error('Failed to initialize Apper client');
+        }
+      }
       const params = {
         fields: [
           { field: { Name: "Name" } },
@@ -110,9 +118,14 @@ class QuestionnairesService {
     }
   }
 
-  async getAnswersByQuestion(questionId) {
+async getAnswersByQuestion(questionId) {
     try {
-      if (!this.apperClient) this.initializeApperClient();
+      if (!this.apperClient) {
+        this.initializeApperClient();
+        if (!this.apperClient) {
+          throw new Error('Failed to initialize Apper client');
+        }
+      }
 
       const params = {
         fields: [
@@ -144,10 +157,14 @@ class QuestionnairesService {
     }
   }
 
-  async getCompetenciesByQuestion(questionId) {
+async getCompetenciesByQuestion(questionId) {
     try {
-      if (!this.apperClient) this.initializeApperClient();
-
+      if (!this.apperClient) {
+        this.initializeApperClient();
+        if (!this.apperClient) {
+          throw new Error('Failed to initialize Apper client');
+        }
+      }
       const params = {
         fields: [
           { field: { Name: "Name" } }
@@ -174,10 +191,14 @@ class QuestionnairesService {
     }
   }
 
-  async getById(id) {
+async getById(id) {
     try {
-      if (!this.apperClient) this.initializeApperClient();
-
+      if (!this.apperClient) {
+        this.initializeApperClient();
+        if (!this.apperClient) {
+          throw new Error('Failed to initialize Apper client');
+        }
+      }
       const params = {
         fields: [
           { field: { Name: "Name" } },
@@ -211,9 +232,14 @@ class QuestionnairesService {
     }
   }
 
-  async create(questionnaire) {
+async create(questionnaire) {
     try {
-      if (!this.apperClient) this.initializeApperClient();
+      if (!this.apperClient) {
+        this.initializeApperClient();
+        if (!this.apperClient) {
+          throw new Error('Failed to initialize Apper client');
+        }
+      }
 
       const params = {
         records: [
@@ -273,9 +299,15 @@ class QuestionnairesService {
       throw error;
     }
   }
-
-  async createQuestions(questionnaireId, questions) {
+async createQuestions(questionnaireId, questions) {
     try {
+      if (!this.apperClient) {
+        this.initializeApperClient();
+        if (!this.apperClient) {
+          throw new Error('Failed to initialize Apper client');
+        }
+      }
+      
       for (const question of questions) {
         // Create question
         const questionParams = {
@@ -347,10 +379,14 @@ class QuestionnairesService {
     }
   }
 
-  async update(id, questionnaire) {
+async update(id, questionnaire) {
     try {
-      if (!this.apperClient) this.initializeApperClient();
-
+      if (!this.apperClient) {
+        this.initializeApperClient();
+        if (!this.apperClient) {
+          throw new Error('Failed to initialize Apper client');
+        }
+      }
       const params = {
         records: [
           {
@@ -382,8 +418,14 @@ class QuestionnairesService {
     }
   }
 
-  async updateQuestions(questionnaireId, questions) {
+async updateQuestions(questionnaireId, questions) {
     try {
+      if (!this.apperClient) {
+        this.initializeApperClient();
+        if (!this.apperClient) {
+          throw new Error('Failed to initialize Apper client');
+        }
+      }
       // Delete existing questions and related data
       await this.deleteQuestionsByQuestionnaire(questionnaireId);
 
@@ -396,8 +438,14 @@ class QuestionnairesService {
     }
   }
 
-  async deleteQuestionsByQuestionnaire(questionnaireId) {
+async deleteQuestionsByQuestionnaire(questionnaireId) {
     try {
+      if (!this.apperClient) {
+        this.initializeApperClient();
+        if (!this.apperClient) {
+          throw new Error('Failed to initialize Apper client');
+        }
+      }
       // Get all question IDs for this questionnaire
       const params = {
         fields: [{ field: { Name: "Id" } }],
@@ -433,8 +481,14 @@ class QuestionnairesService {
     }
   }
 
-  async deleteAnswersByQuestion(questionId) {
+async deleteAnswersByQuestion(questionId) {
     try {
+      if (!this.apperClient) {
+        this.initializeApperClient();
+        if (!this.apperClient) {
+          throw new Error('Failed to initialize Apper client');
+        }
+      }
       const params = {
         fields: [{ field: { Name: "Id" } }],
         where: [
@@ -461,8 +515,14 @@ class QuestionnairesService {
     }
   }
 
-  async deleteCompetenciesByQuestion(questionId) {
+async deleteCompetenciesByQuestion(questionId) {
     try {
+      if (!this.apperClient) {
+        this.initializeApperClient();
+        if (!this.apperClient) {
+          throw new Error('Failed to initialize Apper client');
+        }
+      }
       const params = {
         fields: [{ field: { Name: "Id" } }],
         where: [
@@ -489,10 +549,14 @@ class QuestionnairesService {
     }
   }
 
-  async delete(id) {
+async delete(id) {
     try {
-      if (!this.apperClient) this.initializeApperClient();
-
+      if (!this.apperClient) {
+        this.initializeApperClient();
+        if (!this.apperClient) {
+          throw new Error('Failed to initialize Apper client');
+        }
+      }
       // Delete associated questions and related data first
       await this.deleteQuestionsByQuestionnaire(id);
 

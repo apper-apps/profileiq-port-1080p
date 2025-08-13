@@ -9,9 +9,9 @@ import ApperIcon from "@/components/ApperIcon";
 import { questionnairesService } from "@/services/api/questionnaires";
 
 const QuestionnaireBuilder = ({ questionnaireId, onSave }) => {
-  const [questionnaire, setQuestionnaire] = useState({
-    title: "",
-    description: "",
+const [questionnaire, setQuestionnaire] = useState({
+    title_c: "",
+    description_c: "",
     questions: []
   });
   const [showQuestionForm, setShowQuestionForm] = useState(false);
@@ -127,17 +127,17 @@ const QuestionnaireBuilder = ({ questionnaireId, onSave }) => {
       <Card className="p-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Questionnaire Information</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Input
+<Input
             label="Title"
-            value={questionnaire.title}
-            onChange={(e) => setQuestionnaire(prev => ({ ...prev, title: e.target.value }))}
+            value={questionnaire.title_c}
+            onChange={(e) => setQuestionnaire(prev => ({ ...prev, title_c: e.target.value }))}
             placeholder="Enter questionnaire title"
             required
           />
-          <Input
+<Input
             label="Description"
-            value={questionnaire.description}
-            onChange={(e) => setQuestionnaire(prev => ({ ...prev, description: e.target.value }))}
+            value={questionnaire.description_c}
+            onChange={(e) => setQuestionnaire(prev => ({ ...prev, description_c: e.target.value }))}
             placeholder="Brief description"
           />
         </div>
