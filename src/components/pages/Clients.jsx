@@ -217,17 +217,18 @@ onChange={(e) => setSearchTerm(e.target.value)}
 >
                   Aggiungi Crediti
                 </Button>
-                <Button
+<Button
                   variant="ghost"
                   size="sm"
                   icon="Eye"
                   className="flex-1"
-className="flex-1"
                 >
-                  Visualizza Dettagli
+Visualizza Dettagli
                 </Button>
+              </div>
             </Card>
           ))}
+        </div>
       )}
 
       {/* Add Credits Modal */}
