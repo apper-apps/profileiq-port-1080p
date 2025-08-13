@@ -1,39 +1,56 @@
-import { createContext, useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { createContext, useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { setUser, clearUser } from '@/store/userSlice';
-import Login from "@/components/pages/Login";
-import Register from "@/components/pages/Register";
-import Callback from "@/components/pages/Callback";
-import ErrorPage from "@/components/pages/ErrorPage";
-import ResetPassword from "@/components/pages/ResetPassword";
-import PromptPassword from "@/components/pages/PromptPassword";
-
-// Layout
-import Layout from "@/components/pages/Layout";
-
-// Pages
-import Dashboard from "@/components/pages/Dashboard";
-import Questionnaires from "@/components/pages/Questionnaires";
-import Profiles from "@/components/pages/Profiles";
+import { useDispatch, useSelector } from "react-redux";
 import Chatbot from "@/components/pages/Chatbot";
 import Clients from "@/components/pages/Clients";
+import Callback from "@/components/pages/Callback";
 import Credits from "@/components/pages/Credits";
+import Dashboard from "@/components/pages/Dashboard";
+import Login from "@/components/pages/Login";
+import PromptPassword from "@/components/pages/PromptPassword";
+import Register from "@/components/pages/Register";
+import ErrorPage from "@/components/pages/ErrorPage";
+import Layout from "@/components/pages/Layout";
+import Questionnaires from "@/components/pages/Questionnaires";
+import Profiles from "@/components/pages/Profiles";
+import ResetPassword from "@/components/pages/ResetPassword";
+import Groups from "@/components/pages/Groups";
+import profilesData from "@/services/mockData/profiles.json";
+import chatbotData from "@/services/mockData/chatbot.json";
+import clientsData from "@/services/mockData/clients.json";
+import questionnairesData from "@/services/mockData/questionnaires.json";
+import resultsData from "@/services/mockData/results.json";
+import { clearUser, setUser } from "@/store/userSlice";
+
+// Layout
+
+// Pages
 
 // Create auth context
 export const AuthContext = createContext(null);
 
 function AppContent() {
-  const navigate = useNavigate();
+const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isInitialized, setIsInitialized] = useState(false);
-  
-  // Get authentication status with proper error handling
-  const userState = useSelector((state) => state.user);
-  const isAuthenticated = userState?.isAuthenticated || false;
-  
+const userState = useSelector((state) => state.user);
+const isAuthenticated = userState?.isAuthenticated || false;
   // Initialize ApperUI once when the app loads
+// Authentication methods to share via context
+  const authMethods = {
+    isInitialized,
+    logout: async () => {
+      try {
+        const { ApperUI } = window.ApperSDK;
+        await ApperUI.logout();
+        dispatch(clearUser());
+        navigate('/login');
+      } catch (error) {
+        console.error("Logout failed:", error);
+      }
+    }
+  };
 useEffect(() => {
     const { ApperClient, ApperUI } = window.ApperSDK;
     
@@ -53,7 +70,7 @@ useEffect(() => {
         // DO NOT simplify or modify this pattern as it ensures proper redirection flow
         let currentPath = window.location.pathname + window.location.search;
         let redirectPath = new URLSearchParams(window.location.search).get('redirect');
-        const isAuthPage = currentPath.includes('/login') || currentPath.includes('/register') || 
+        const isAuthPage = currentPath.includes('/login') || currentPath.includes('/register') || currentPath.includes('/signup') ||
                            currentPath.includes('/callback') || currentPath.includes('/error') || 
                            currentPath.includes('/prompt-password') || currentPath.includes('/reset-password');
         
@@ -62,7 +79,7 @@ useEffect(() => {
           if (redirectPath) {
             navigate(redirectPath);
           } else if (!isAuthPage) {
-            if (!currentPath.includes('/login') && !currentPath.includes('/register')) {
+            if (!currentPath.includes('/login') && !currentPath.includes('/register') && !currentPath.includes('/signup')) {
               navigate(currentPath);
             } else {
               navigate('/');
@@ -76,7 +93,7 @@ useEffect(() => {
           // User is not authenticated
           if (!isAuthPage) {
             navigate(
-              currentPath.includes('/register')
+              currentPath.includes('/register') || currentPath.includes('/signup')
                 ? `/register?redirect=${currentPath}`
                 : currentPath.includes('/login')
                 ? `/login?redirect=${currentPath}`
@@ -84,7 +101,7 @@ useEffect(() => {
             );
           } else if (redirectPath) {
             if (
-              !['error', 'register', 'login', 'callback', 'prompt-password', 'reset-password'].some((path) => currentPath.includes(path))
+              !['error', 'register', 'signup', 'login', 'callback', 'prompt-password', 'reset-password'].some((path) => currentPath.includes(path))
             ) {
               navigate(`/login?redirect=${redirectPath}`);
             } else {
@@ -100,30 +117,23 @@ useEffect(() => {
       },
       onError: function(error) {
         console.error("Authentication failed:", error);
+        setIsInitialized(true);
       }
     });
   }, [navigate, dispatch]);
-  
-  // Authentication methods to share via context
-  const authMethods = {
-    isInitialized,
-    logout: async () => {
-      try {
-        const { ApperUI } = window.ApperSDK;
-        await ApperUI.logout();
-        dispatch(clearUser());
-        navigate('/login');
-      } catch (error) {
-        console.error("Logout failed:", error);
-      }
-    }
-  };
-  
+
   // Don't render routes until initialization is complete
   if (!isInitialized) {
-    return <div className="loading flex items-center justify-center p-6 h-full w-full"><svg className="animate-spin" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v4"></path><path d="m16.2 7.8 2.9-2.9"></path><path d="M18 12h4"></path><path d="m16.2 16.2 2.9 2.9"></path><path d="M12 18v4"></path><path d="m4.9 19.1 2.9-2.9"></path><path d="M2 12h4"></path><path d="m4.9 4.9 2.9 2.9"></path></svg></div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-primary">
+        <div className="flex flex-col items-center space-y-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+          <p className="text-white font-medium">Initializing...</p>
+        </div>
+      </div>
+    );
   }
-  
+
   return (
     <AuthContext.Provider value={authMethods}>
       <Routes>
@@ -140,31 +150,30 @@ useEffect(() => {
           <Route path="chatbot" element={<Chatbot />} />
           <Route path="clients" element={<Clients />} />
           <Route path="credits" element={<Credits />} />
+          <Route path="groups" element={<Groups />} />
         </Route>
       </Routes>
-      
       <ToastContainer
         position="top-right"
-        autoClose={3000}
+        autoClose={5000}
         hideProgressBar={false}
-        newestOnTop
+        newestOnTop={false}
         closeOnClick
         rtl={false}
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
       />
     </AuthContext.Provider>
   );
 }
 
-const App = () => {
+function App() {
   return (
     <BrowserRouter>
       <AppContent />
     </BrowserRouter>
   );
-};
+}
 
 export default App;
