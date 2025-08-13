@@ -6,19 +6,31 @@ class ClientsService {
     this.initializeApperClient();
   }
 
-  initializeApperClient() {
+initializeApperClient() {
     if (typeof window !== 'undefined' && window.ApperSDK) {
-      const { ApperClient } = window.ApperSDK;
-      this.apperClient = new ApperClient({
-        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
-        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
-      });
+      try {
+        const { ApperClient } = window.ApperSDK;
+        this.apperClient = new ApperClient({
+          apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+          apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+        });
+        return true;
+      } catch (error) {
+        console.error("Failed to initialize ApperClient:", error);
+        return false;
+      }
     }
+    return false;
   }
 
   async getAll() {
     try {
-      if (!this.apperClient) this.initializeApperClient();
+if (!this.apperClient) {
+        const initialized = this.initializeApperClient();
+        if (!initialized) {
+          throw new Error("ApperSDK not available. Please ensure the application is properly loaded.");
+        }
+      }
       
       const params = {
         fields: [
@@ -64,7 +76,12 @@ class ClientsService {
 
   async getUsageByClient(clientId) {
     try {
-      if (!this.apperClient) this.initializeApperClient();
+if (!this.apperClient) {
+        const initialized = this.initializeApperClient();
+        if (!initialized) {
+          throw new Error("ApperSDK not available. Please ensure the application is properly loaded.");
+        }
+      }
 
       const params = {
         fields: [
@@ -115,7 +132,12 @@ class ClientsService {
 
   async getById(id) {
     try {
-      if (!this.apperClient) this.initializeApperClient();
+if (!this.apperClient) {
+        const initialized = this.initializeApperClient();
+        if (!initialized) {
+          throw new Error("ApperSDK not available. Please ensure the application is properly loaded.");
+        }
+      }
 
       const params = {
         fields: [
@@ -156,7 +178,12 @@ class ClientsService {
 
   async create(client) {
     try {
-      if (!this.apperClient) this.initializeApperClient();
+if (!this.apperClient) {
+        const initialized = this.initializeApperClient();
+        if (!initialized) {
+          throw new Error("ApperSDK not available. Please ensure the application is properly loaded.");
+        }
+      }
 
       const brandSlug = client.brand?.toLowerCase()
         .replace(/[^a-z0-9]/g, '-')
@@ -221,7 +248,12 @@ class ClientsService {
 
   async addCredits(id, credits, reason) {
     try {
-      if (!this.apperClient) this.initializeApperClient();
+if (!this.apperClient) {
+        const initialized = this.initializeApperClient();
+        if (!initialized) {
+          throw new Error("ApperSDK not available. Please ensure the application is properly loaded.");
+        }
+      }
 
       // First get current client data
       const client = await this.getById(id);

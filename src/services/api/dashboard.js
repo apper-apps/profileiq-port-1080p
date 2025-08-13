@@ -1,3 +1,5 @@
+import React from "react";
+import Error from "@/components/ui/Error";
 class DashboardService {
   constructor() {
     this.apperClient = null;
@@ -6,17 +8,29 @@ class DashboardService {
 
   initializeApperClient() {
     if (typeof window !== 'undefined' && window.ApperSDK) {
-      const { ApperClient } = window.ApperSDK;
-      this.apperClient = new ApperClient({
-        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
-        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
-      });
+      try {
+        const { ApperClient } = window.ApperSDK;
+        this.apperClient = new ApperClient({
+          apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+          apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+        });
+        return true;
+      } catch (error) {
+        console.error("Failed to initialize ApperClient:", error);
+        return false;
+      }
     }
+    return false;
   }
 
-  async getStats() {
+async getStats() {
     try {
-      if (!this.apperClient) this.initializeApperClient();
+      if (!this.apperClient) {
+        const initialized = this.initializeApperClient();
+        if (!initialized) {
+          throw new Error("ApperSDK not available. Please ensure the application is properly loaded.");
+        }
+      }
 
       // Get counts from different tables
       const [questionnaires, profiles, usage, clients] = await Promise.all([
@@ -87,8 +101,15 @@ class DashboardService {
     }
   }
 
-  async getUsageStats() {
+async getUsageStats() {
     try {
+      if (!this.apperClient) {
+        const initialized = this.initializeApperClient();
+        if (!initialized) {
+          throw new Error("ApperSDK not available. Please ensure the application is properly loaded.");
+        }
+      }
+      
       const params = {
         fields: [
           { field: { Name: "type_c" } },
@@ -106,7 +127,7 @@ class DashboardService {
         ]
       };
 
-      const response = await this.apperClient.fetchRecords('usage_c', params);
+const response = await this.apperClient.fetchRecords('usage_c', params);
       return response.success ? response.data : [];
     } catch (error) {
       return [];
@@ -115,6 +136,12 @@ class DashboardService {
 
   async getClientStats() {
     try {
+      if (!this.apperClient) {
+        const initialized = this.initializeApperClient();
+        if (!initialized) {
+          throw new Error("ApperSDK not available. Please ensure the application is properly loaded.");
+        }
+      }
       const params = {
         fields: [
           { field: { Name: "credits_c" } }
