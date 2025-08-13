@@ -8,7 +8,7 @@ import ApperIcon from "@/components/ApperIcon";
 import { profilesService } from "@/services/api/profiles";
 
 const ProfileBuilder = ({ profileId, onSave }) => {
-  const [profile, setProfile] = useState({
+const [profile, setProfile] = useState({
     name: "",
     category: "",
     description: "",
@@ -114,7 +114,7 @@ const ProfileBuilder = ({ profileId, onSave }) => {
       <Card className="p-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Profile Information</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <Input
+<Input
             label="Profile Name"
             value={profile.name}
             onChange={(e) => setProfile(prev => ({ ...prev, name: e.target.value }))}

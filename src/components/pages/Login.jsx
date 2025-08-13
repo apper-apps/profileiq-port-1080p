@@ -1,17 +1,26 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Card from "@/components/atoms/Card";
+import { AuthContext } from "@/App";
 import Button from "@/components/atoms/Button";
+import Card from "@/components/atoms/Card";
 import Input from "@/components/atoms/Input";
-import { toast } from "react-toastify";
 
-const Login = () => {
+function Login() {
+  const { isInitialized } = useContext(AuthContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: ""
   });
   const [loading, setLoading] = useState(false);
+  
+  useEffect(() => {
+    if (isInitialized) {
+      // Show login UI in this component
+      const { ApperUI } = window.ApperSDK;
+      ApperUI.showLogin("#authentication");
+    }
+  }, [isInitialized]);
 
   const handleChange = (e) => {
     setFormData(prev => ({
@@ -22,22 +31,20 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (!formData.email || !formData.password) {
-      toast.error("Compila tutti i campi obbligatori");
-      return;
-    }
-
     setLoading(true);
     
-    // Simulate login process
-    setTimeout(() => {
-      toast.success("Accesso effettuato con successo!");
-      navigate("/");
+    try {
+      // Handle form submission logic here
+      console.log('Login attempt:', formData);
+      // Navigate on success
+      // navigate('/dashboard');
+    } catch (error) {
+      console.error('Login failed:', error);
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   };
-
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 via-purple-50 to-pink-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
@@ -49,6 +56,7 @@ const Login = () => {
         </div>
 
         <Card className="p-8 shadow-xl bg-white/80 backdrop-blur-sm">
+          <div id="authentication" />
           <form onSubmit={handleSubmit} className="space-y-6">
             <Input
               label="Email"
@@ -94,6 +102,6 @@ const Login = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Login;

@@ -124,9 +124,9 @@ const ChatbotSimulator = () => {
             label="Select Profile"
             value={selectedProfile}
             onChange={(e) => setSelectedProfile(e.target.value)}
-            options={profiles.map(profile => ({
+options={profiles.map(profile => ({
               value: profile.Id,
-              label: profile.name
+              label: profile.Name
             }))}
             placeholder="Choose a behavioral profile"
           />

@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import ApperIcon from "@/components/ApperIcon";
+import Button from "@/components/atoms/Button";
+import { AuthContext } from "@/App";
 
 const Sidebar = ({ isOpen, onClose }) => {
   const location = useLocation();
+  const { logout } = useContext(AuthContext);
   
   const navigation = [
     { name: "Dashboard", href: "/", icon: "LayoutDashboard" },
@@ -23,8 +26,8 @@ const Sidebar = ({ isOpen, onClose }) => {
             <ApperIcon name="Brain" size={24} className="text-white" />
           </div>
           <div>
-<h1 className="text-xl font-bold text-gray-900">Talent Scanner</h1>
-            <p className="text-xs text-gray-500">Analisi Comportamentale</p>
+            <h1 className="text-xl font-bold text-gray-900">ProfileIQ</h1>
+            <p className="text-xs text-gray-500">Behavioral Assessment</p>
           </div>
         </div>
       </div>
@@ -53,6 +56,21 @@ const Sidebar = ({ isOpen, onClose }) => {
           </NavLink>
         ))}
       </nav>
+
+      {/* Logout Button */}
+      <div className="px-4 pb-4 border-t border-gray-200 pt-4">
+        <Button
+          variant="ghost"
+          onClick={() => {
+            logout();
+            onClose?.();
+          }}
+          icon="LogOut"
+          className="w-full justify-start text-gray-700 hover:text-red-600 hover:bg-red-50"
+        >
+          Logout
+        </Button>
+      </div>
     </div>
   );
 

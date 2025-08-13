@@ -1,8 +1,13 @@
+// Note: Results service would typically integrate with assessment results table
+// For now, using mock implementation as assessment results are not in the provided schema
+
 import resultsData from "@/services/mockData/results.json";
 
 class ResultsService {
   constructor() {
     this.data = [...resultsData];
+    // This would be replaced with actual assessment results table
+    // when that functionality is added to the schema
   }
 
   async getAll() {

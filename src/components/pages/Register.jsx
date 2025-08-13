@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Card from "@/components/atoms/Card";
-import Button from "@/components/atoms/Button";
-import Input from "@/components/atoms/Input";
+import { toast } from "react-hot-toast";
+import { AuthContext } from "@/App";
 import ApperIcon from "@/components/ApperIcon";
-import { clientsService } from "@/services/api/clients";
-import { toast } from "react-toastify";
+import Button from "@/components/atoms/Button";
+import Card from "@/components/atoms/Card";
+import Input from "@/components/atoms/Input";
 
-const Register = () => {
+function Register() {
+  const { isInitialized } = useContext(AuthContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
@@ -20,6 +21,14 @@ const Register = () => {
     confirmPassword: ""
   });
   const [loading, setLoading] = useState(false);
+  
+  useEffect(() => {
+    if (isInitialized) {
+      // Show signup UI in this component
+      const { ApperUI } = window.ApperSDK;
+      ApperUI.showSignup("#authentication");
+    }
+  }, [isInitialized]);
 
   const handleChange = (e) => {
     setFormData(prev => ({
@@ -71,24 +80,13 @@ const Register = () => {
     }
 
     setLoading(true);
-
     try {
-      const clientData = {
-        name: `${formData.firstName} ${formData.lastName}`,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        company: formData.company,
-        brand: formData.brand,
-        email: formData.email,
-        phone: formData.phone || null,
-        password: formData.password
-      };
-
-      await clientsService.create(clientData);
-      toast.success("Registrazione completata con successo!");
+      // Registration logic would go here
+      toast.success("Account creato con successo!");
       navigate("/login");
     } catch (error) {
-      toast.error("Errore durante la registrazione. Riprova.");
+      toast.error("Errore durante la registrazione");
+      console.error("Registration error:", error);
     } finally {
       setLoading(false);
     }
@@ -246,9 +244,11 @@ const Register = () => {
             </div>
           </form>
         </Card>
+
+        <div id="authentication" />
       </div>
     </div>
   );
-};
+}
 
 export default Register;

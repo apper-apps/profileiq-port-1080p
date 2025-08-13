@@ -155,9 +155,9 @@ const Chatbot = () => {
                 setCurrentQuestion("");
                 setCurrentAnswer("");
               }}
-              options={profiles.map(profile => ({
+options={profiles.map(profile => ({
                 value: profile.Id.toString(),
-                label: profile.name
+                label: profile.Name
               }))}
               placeholder="Choose a behavioral profile"
             />

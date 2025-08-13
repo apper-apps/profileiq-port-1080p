@@ -29,9 +29,9 @@ const Profiles = () => {
 
     // Filter by search term
     if (searchTerm) {
-      filtered = filtered.filter(p =>
-        p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        p.description.toLowerCase().includes(searchTerm.toLowerCase())
+filtered = filtered.filter(p =>
+        p.Name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        p.description?.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
@@ -82,10 +82,10 @@ const Profiles = () => {
 
   const handleDuplicate = async (id) => {
     try {
-      const original = await profilesService.getById(id);
+const original = await profilesService.getById(id);
       const duplicate = {
         ...original,
-        name: `${original.name} (Copy)`,
+        name: `${original.Name} (Copy)`,
         Id: undefined
       };
       const created = await profilesService.create(duplicate);
@@ -240,8 +240,8 @@ const Profiles = () => {
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
                   <div className="flex items-center space-x-2 mb-2">
-                    <h3 className="text-lg font-semibold text-gray-900">
-                      {profile.name}
+<h3 className="text-lg font-semibold text-gray-900">
+                      {profile.Name}
                     </h3>
                     <span className={`px-2 py-1 text-xs font-medium rounded-full flex items-center space-x-1 ${getCategoryColor(profile.category)}`}>
                       <ApperIcon name={getCategoryIcon(profile.category)} size={12} />

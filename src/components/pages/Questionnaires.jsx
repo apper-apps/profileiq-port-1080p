@@ -24,9 +24,9 @@ const Questionnaires = () => {
   }, []);
 
   useEffect(() => {
-    const filtered = questionnaires.filter(q =>
-      q.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      q.description.toLowerCase().includes(searchTerm.toLowerCase())
+const filtered = questionnaires.filter(q =>
+      q.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      q.description?.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredQuestionnaires(filtered);
   }, [questionnaires, searchTerm]);
@@ -70,7 +70,7 @@ const Questionnaires = () => {
 
   const handleDuplicate = async (id) => {
     try {
-      const original = await questionnairesService.getById(id);
+const original = await questionnairesService.getById(id);
       const duplicate = {
         ...original,
         title: `${original.title} (Copy)`,

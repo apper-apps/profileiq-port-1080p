@@ -174,7 +174,7 @@ const Credits = () => {
                   <ApperIcon name="Building2" size={20} className="text-primary-600" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-gray-900">{client.name}</h4>
+<h4 className="font-medium text-gray-900">{client.Name}</h4>
                   <p className="text-sm text-gray-500">{client.email}</p>
                 </div>
               </div>
@@ -231,7 +231,7 @@ const Credits = () => {
                 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between mb-1">
-                    <p className="font-medium text-gray-900">{transaction.clientName}</p>
+<p className="font-medium text-gray-900">{transaction.clientName}</p>
                     <div className="flex items-center space-x-2">
                       <span className={`text-lg font-semibold ${
                         transaction.amount > 0 ? "text-green-600" : "text-red-600"

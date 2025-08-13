@@ -28,8 +28,8 @@ const Clients = () => {
 
   useEffect(() => {
     const filtered = clients.filter(client =>
-      client.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      client.email.toLowerCase().includes(searchTerm.toLowerCase())
+      client.Name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      client.email?.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredClients(filtered);
   }, [clients, searchTerm]);
@@ -61,7 +61,7 @@ const handleAddCredits = async () => {
 
     try {
       setAddingCredits(true);
-      const updated = await clientsService.addCredits(selectedClient.Id, amount, creditsForm.reason);
+const updated = await clientsService.addCredits(selectedClient.Id, amount, creditsForm.reason);
       setClients(prev => prev.map(client => 
         client.Id === selectedClient.Id ? updated : client
       ));
@@ -137,16 +137,16 @@ onChange={(e) => setSearchTerm(e.target.value)}
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
           {filteredClients.map((client) => (
-            <Card key={client.Id} hover className="p-6">
+<Card key={client.Id} hover className="p-6">
               <div className="flex items-start justify-between mb-4">
-                <div className="flex-1">
+                <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                    {client.name}
+                    {client.Name}
                   </h3>
                   <p className="text-gray-600 text-sm mb-2">{client.email}</p>
                   <div className="flex items-center space-x-4 text-sm text-gray-500">
                     <div className="flex items-center space-x-1">
-<ApperIcon name="Coins" size={16} />
+                      <ApperIcon name="Coins" size={16} />
                       <span>{client.credits} crediti</span>
                     </div>
                     <div className="flex items-center space-x-1">
@@ -156,7 +156,6 @@ onChange={(e) => setSearchTerm(e.target.value)}
                   </div>
                 </div>
               </div>
-
               {/* Credit Status */}
               <div className="mb-4">
                 <div className={`px-3 py-2 rounded-lg ${
@@ -255,7 +254,7 @@ Visualizza Dettagli
               <div className="mb-4 p-4 bg-gray-50 rounded-lg">
                 <div className="flex items-center justify-between">
                   <div>
-<p className="font-medium text-gray-900">{selectedClient.name}</p>
+<p className="font-medium text-gray-900">{selectedClient.Name}</p>
                     <p className="text-sm text-gray-600">Saldo attuale: {selectedClient.credits} crediti</p>
                   </div>
                 </div>
