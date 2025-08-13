@@ -51,9 +51,9 @@ const handleAddCredits = async () => {
     if (!creditsForm.amount || !creditsForm.reason.trim()) {
       toast.error("Compila tutti i campi");
       return;
-    }
+}
 
-const amount = parseInt(creditsForm.amount);
+    const amount = parseInt(creditsForm.amount);
     if (amount <= 0) {
       toast.error("L'importo deve essere maggiore di 0");
       return;
