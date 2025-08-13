@@ -1,0 +1,66 @@
+[
+  {
+    "Id": 1,
+    "title": "Leadership Assessment v2.0",
+    "description": "Comprehensive leadership behavioral analysis",
+    "createdAt": "2024-01-10T08:30:00Z",
+    "isActive": true,
+    "questions": [
+      {
+        "Id": 1,
+        "text": "Do you often take charge in group situations?",
+        "type": "boolean",
+        "weight": 1.5,
+        "competencies": ["Leadership", "Communication"],
+        "answers": [
+          { "value": "yes", "points": 3 },
+          { "value": "no", "points": -1 },
+          { "value": "maybe", "points": 0 }
+        ]
+      },
+      {
+        "Id": 2,
+        "text": "How comfortable are you with making difficult decisions?",
+        "type": "likert",
+        "weight": 2.0,
+        "competencies": ["Decision Making", "Leadership"],
+        "answers": [
+          { "value": 1, "points": -2 },
+          { "value": 2, "points": -1 },
+          { "value": 3, "points": 0 },
+          { "value": 4, "points": 2 },
+          { "value": 5, "points": 3 }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": 2,
+    "title": "Team Collaboration Profile",
+    "description": "Assess teamwork and collaboration skills",
+    "createdAt": "2024-01-12T14:20:00Z",
+    "isActive": true,
+    "questions": [
+      {
+        "Id": 3,
+        "text": "Do you prefer working in teams or individually?",
+        "type": "multiple",
+        "weight": 1.0,
+        "competencies": ["Teamwork", "Adaptability"],
+        "answers": [
+          { "value": "team", "points": 3 },
+          { "value": "individual", "points": -1 },
+          { "value": "depends", "points": 1 }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": 3,
+    "title": "Communication Skills Evaluation",
+    "description": "Evaluate communication and interpersonal abilities",
+    "createdAt": "2024-01-08T11:45:00Z",
+    "isActive": false,
+    "questions": []
+  }
+]

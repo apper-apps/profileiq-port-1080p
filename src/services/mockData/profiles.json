@@ -1,0 +1,50 @@
+[
+  {
+    "Id": 1,
+    "name": "Toxic Leader",
+    "category": "critical",
+    "description": "High influence but low emotional intelligence, tends to dominate rather than collaborate",
+    "rules": [
+      { "competency": "leadership", "operator": "gt", "value": 85, "logic": "AND" },
+      { "competency": "communication", "operator": "lt", "value": 40, "logic": "AND" },
+      { "competency": "teamwork", "operator": "lt", "value": 35, "logic": "AND" }
+    ],
+    "createdAt": "2024-01-05T09:15:00Z"
+  },
+  {
+    "Id": 2,
+    "name": "Collaborative Leader",
+    "category": "excellence",
+    "description": "Strong leadership skills combined with excellent teamwork and communication abilities",
+    "rules": [
+      { "competency": "leadership", "operator": "gt", "value": 75, "logic": "AND" },
+      { "competency": "communication", "operator": "gt", "value": 70, "logic": "AND" },
+      { "competency": "teamwork", "operator": "gt", "value": 80, "logic": "AND" }
+    ],
+    "createdAt": "2024-01-06T14:30:00Z"
+  },
+  {
+    "Id": 3,
+    "name": "Innovation Driver",
+    "category": "excellence",
+    "description": "Highly creative individual who drives innovation and adapts well to change",
+    "rules": [
+      { "competency": "problemSolving", "operator": "gt", "value": 80, "logic": "AND" },
+      { "competency": "adaptability", "operator": "gt", "value": 75, "logic": "AND" },
+      { "competency": "organization", "operator": "gt", "value": 60, "logic": "AND" }
+    ],
+    "createdAt": "2024-01-07T16:45:00Z"
+  },
+  {
+    "Id": 4,
+    "name": "Passive Follower",
+    "category": "critical",
+    "description": "Lacks initiative and tends to avoid decision-making responsibilities",
+    "rules": [
+      { "competency": "leadership", "operator": "lt", "value": 30, "logic": "AND" },
+      { "competency": "problemSolving", "operator": "lt", "value": 40, "logic": "AND" },
+      { "competency": "organization", "operator": "lt", "value": 45, "logic": "AND" }
+    ],
+    "createdAt": "2024-01-09T10:20:00Z"
+  }
+]

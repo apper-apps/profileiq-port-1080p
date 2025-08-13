@@ -1,0 +1,83 @@
+[
+  {
+    "Id": 1,
+    "name": "TechCorp Solutions",
+    "email": "admin@techcorp.com",
+    "credits": 450,
+    "apiKey": "profileiq_abc123def456",
+    "createdAt": "2024-01-01T00:00:00Z",
+    "usage": [
+      {
+        "Id": 1,
+        "type": "questionnaire_analyzed",
+        "amount": -1,
+        "candidateName": "John Doe",
+        "profileDetected": "Collaborative Leader",
+        "timestamp": "2024-01-15T10:30:00Z",
+        "balance": 451
+      },
+      {
+        "Id": 2,
+        "type": "credit_purchase",
+        "amount": 500,
+        "reason": "Monthly subscription",
+        "timestamp": "2024-01-01T09:00:00Z",
+        "balance": 500
+      },
+      {
+        "Id": 3,
+        "type": "questionnaire_analyzed",
+        "amount": -1,
+        "candidateName": "Jane Smith",
+        "profileDetected": "Innovation Driver",
+        "timestamp": "2024-01-14T15:20:00Z",
+        "balance": 452
+      }
+    ]
+  },
+  {
+    "Id": 2,
+    "name": "HR Dynamics Ltd",
+    "email": "contact@hrdynamics.com",
+    "credits": 1200,
+    "apiKey": "profileiq_xyz789ghi012",
+    "createdAt": "2023-12-15T00:00:00Z",
+    "usage": [
+      {
+        "Id": 4,
+        "type": "credit_added",
+        "amount": 100,
+        "reason": "Manual credit addition - bonus",
+        "timestamp": "2024-01-10T12:00:00Z",
+        "balance": 1200
+      },
+      {
+        "Id": 5,
+        "type": "questionnaire_analyzed",
+        "amount": -1,
+        "candidateName": "Mike Johnson",
+        "profileDetected": "Toxic Leader",
+        "timestamp": "2024-01-13T11:45:00Z",
+        "balance": 1201
+      }
+    ]
+  },
+  {
+    "Id": 3,
+    "name": "Global Talent Agency",
+    "email": "info@globaltalent.com",
+    "credits": 75,
+    "apiKey": "profileiq_mno345pqr678",
+    "createdAt": "2024-01-05T00:00:00Z",
+    "usage": [
+      {
+        "Id": 6,
+        "type": "credit_purchase",
+        "amount": 200,
+        "reason": "Initial package",
+        "timestamp": "2024-01-05T14:30:00Z",
+        "balance": 200
+      }
+    ]
+  }
+]

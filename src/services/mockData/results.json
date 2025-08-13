@@ -1,0 +1,56 @@
+[
+  {
+    "Id": 1,
+    "candidateName": "John Doe",
+    "candidateEmail": "john.doe@email.com",
+    "clientId": 1,
+    "questionnaireId": 1,
+    "timestamp": "2024-01-15T10:30:00Z",
+    "scores": [
+      { "competency": "Leadership", "score": 85 },
+      { "competency": "Communication", "score": 78 },
+      { "competency": "Problem Solving", "score": 72 },
+      { "competency": "Teamwork", "score": 88 },
+      { "competency": "Organization", "score": 65 },
+      { "competency": "Adaptability", "score": 70 }
+    ],
+    "profiles": ["Collaborative Leader"],
+    "reliability": "high"
+  },
+  {
+    "Id": 2,
+    "candidateName": "Jane Smith",
+    "candidateEmail": "jane.smith@email.com",
+    "clientId": 1,
+    "questionnaireId": 1,
+    "timestamp": "2024-01-14T15:20:00Z",
+    "scores": [
+      { "competency": "Leadership", "score": 65 },
+      { "competency": "Communication", "score": 82 },
+      { "competency": "Problem Solving", "score": 90 },
+      { "competency": "Teamwork", "score": 75 },
+      { "competency": "Organization", "score": 68 },
+      { "competency": "Adaptability", "score": 85 }
+    ],
+    "profiles": ["Innovation Driver"],
+    "reliability": "high"
+  },
+  {
+    "Id": 3,
+    "candidateName": "Mike Johnson",
+    "candidateEmail": "mike.johnson@email.com",
+    "clientId": 2,
+    "questionnaireId": 1,
+    "timestamp": "2024-01-13T11:45:00Z",
+    "scores": [
+      { "competency": "Leadership", "score": 92 },
+      { "competency": "Communication", "score": 35 },
+      { "competency": "Problem Solving", "score": 78 },
+      { "competency": "Teamwork", "score": 28 },
+      { "competency": "Organization", "score": 85 },
+      { "competency": "Adaptability", "score": 45 }
+    ],
+    "profiles": ["Toxic Leader"],
+    "reliability": "medium"
+  }
+]

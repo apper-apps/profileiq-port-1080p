@@ -1,0 +1,52 @@
+{
+  "responses": {
+    "1": {
+      "overview": {
+        "What defines this behavioral profile?": "The Toxic Leader profile is characterized by high leadership capabilities combined with poor interpersonal skills. These individuals often possess strong decision-making abilities and can drive results, but they tend to dominate others rather than collaborate effectively.",
+        "How common is this profile type?": "Toxic Leaders represent approximately 15-20% of individuals in leadership positions. While relatively common, their impact on team dynamics can be disproportionately negative.",
+        "What are the key characteristics?": "Key characteristics include: dominance over collaboration, poor emotional intelligence, results-focused at the expense of relationships, difficulty receiving feedback, and tendency to micromanage."
+      },
+      "strengths": {
+        "What are the main strengths?": "Despite their challenges, Toxic Leaders often excel at: driving results and meeting targets, making quick decisions under pressure, taking charge in crisis situations, and maintaining high personal standards.",
+        "Which skills stand out?": "Their standout skills typically include strategic thinking, goal orientation, assertiveness, and the ability to push through obstacles.",
+        "How can these strengths be leveraged?": "These strengths work best in individual contributor roles, short-term crisis management, or positions with minimal direct reports where their drive can be channeled productively."
+      },
+      "risks": {
+        "What are the potential risks?": "Major risks include: high team turnover, decreased employee engagement, creation of toxic work environments, potential legal issues from poor people management, and damage to company culture.",
+        "Which situations to avoid?": "Avoid placing them in: large team leadership roles, mentoring positions, customer-facing roles requiring empathy, or situations requiring consensus building.",
+        "How to mitigate weaknesses?": "Mitigation strategies include: executive coaching focused on emotional intelligence, 360-degree feedback programs, pairing with strong people managers, and setting clear behavioral expectations."
+      },
+      "recommendations": {
+        "What development actions are recommended?": "Recommended development includes: emotional intelligence training, leadership coaching with focus on collaboration, communication skills workshops, and mindfulness or stress management programs.",
+        "How to improve performance?": "Performance improvement should focus on: developing active listening skills, practicing empathy, learning to delegate effectively, and receiving regular feedback on leadership style.",
+        "Which training programs would help?": "Beneficial programs include: transformational leadership courses, conflict resolution training, team building workshops, and executive coaching programs."
+      },
+      "roles": {
+        "What roles are most suitable?": "Most suitable roles include: individual contributor positions, project management roles with limited team interaction, crisis management positions, and strategic planning roles.",
+        "Which positions to avoid?": "Avoid roles such as: large team management, HR leadership, customer service management, or any position requiring high emotional intelligence and people development.",
+        "What team dynamics work best?": "They work best with: experienced team members who don't require much guidance, in structured environments with clear processes, and with minimal direct reports."
+      }
+    },
+    "2": {
+      "overview": {
+        "What defines this behavioral profile?": "The Collaborative Leader profile represents the ideal balance of strong leadership capabilities with excellent interpersonal skills. These individuals can drive results while building strong, engaged teams.",
+        "How common is this profile type?": "Collaborative Leaders are relatively rare, representing only about 10-15% of leadership candidates. They are highly sought after for their balanced approach to leadership.",
+        "What are the key characteristics?": "Key characteristics include: strong communication skills, ability to build consensus, emotional intelligence, delegation skills, and focus on team development alongside results."
+      }
+    },
+    "3": {
+      "overview": {
+        "What defines this behavioral profile?": "Innovation Drivers are creative problem-solvers who excel at adapting to change and driving innovative solutions. They combine high analytical skills with creative thinking.",
+        "How common is this profile type?": "Innovation Drivers represent about 12-18% of the workforce, making them valuable but not extremely rare. They are essential for organizations focusing on growth and adaptation.",
+        "What are the key characteristics?": "Key traits include: creative problem-solving, adaptability to change, analytical thinking, willingness to take calculated risks, and ability to see opportunities in challenges."
+      }
+    },
+    "4": {
+      "overview": {
+        "What defines this behavioral profile?": "Passive Followers tend to avoid taking initiative and prefer to follow established processes. They may lack confidence in decision-making and leadership situations.",
+        "How common is this profile type?": "Passive Followers represent approximately 25-30% of the workforce. While common, they require specific management approaches to be effective.",
+        "What are the key characteristics?": "Characteristics include: preference for following rather than leading, avoidance of decision-making, need for clear direction, tendency to wait for instructions, and discomfort with ambiguity."
+      }
+    }
+  }
+}
