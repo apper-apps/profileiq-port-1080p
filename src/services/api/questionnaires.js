@@ -515,6 +515,4 @@ class QuestionnairesService {
     }
   }
 }
-
-export const questionnairesService = new QuestionnairesService();
 export const questionnairesService = new QuestionnairesService();

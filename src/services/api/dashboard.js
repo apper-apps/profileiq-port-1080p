@@ -188,6 +188,4 @@ class DashboardService {
     return Object.values(monthlyData);
   }
 }
-
-export const dashboardService = new DashboardService();
 export const dashboardService = new DashboardService();
