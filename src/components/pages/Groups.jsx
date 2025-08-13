@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { groupService } from '@/services/api/groups';
 import { subscriptionService } from '@/services/api/subscriptions';
-import { clientService } from '@/services/api/clients';
+import { clientsService } from '@/services/api/clients';
 import ApperIcon from '@/components/ApperIcon';
 import Button from '@/components/atoms/Button';
 import Card from '@/components/atoms/Card';
@@ -48,8 +48,8 @@ const Groups = () => {
   };
 
   const loadClients = async () => {
-    try {
-      const data = await clientService.getAll();
+try {
+      const data = await clientsService.getAll();
       setClients(data || []);
     } catch (err) {
       console.error('Error loading clients:', err);

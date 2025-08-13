@@ -5,19 +5,31 @@ class ChatbotService {
     this.initializeApperClient();
   }
 
-  initializeApperClient() {
+initializeApperClient() {
     if (typeof window !== 'undefined' && window.ApperSDK) {
-      const { ApperClient } = window.ApperSDK;
-      this.apperClient = new ApperClient({
-        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
-        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
-      });
+      try {
+        const { ApperClient } = window.ApperSDK;
+        this.apperClient = new ApperClient({
+          apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+          apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+        });
+        return true;
+      } catch (error) {
+        console.error("Failed to initialize ApperClient:", error);
+        return false;
+      }
     }
+    return false;
   }
 
   async getResponse(profileId, section, question) {
     try {
-      if (!this.apperClient) this.initializeApperClient();
+if (!this.apperClient) {
+        const initialized = this.initializeApperClient();
+        if (!initialized) {
+          throw new Error("ApperSDK not available. Please ensure the application is properly loaded.");
+        }
+      }
 
       const params = {
         fields: [
@@ -57,7 +69,12 @@ class ChatbotService {
 
   async updateResponse(profileId, section, question, responseText) {
     try {
-      if (!this.apperClient) this.initializeApperClient();
+if (!this.apperClient) {
+        const initialized = this.initializeApperClient();
+        if (!initialized) {
+          throw new Error("ApperSDK not available. Please ensure the application is properly loaded.");
+        }
+      }
 
       // Check if response already exists
       const existingParams = {
@@ -136,7 +153,12 @@ class ChatbotService {
 
   async getAllResponses() {
     try {
-      if (!this.apperClient) this.initializeApperClient();
+if (!this.apperClient) {
+        const initialized = this.initializeApperClient();
+        if (!initialized) {
+          throw new Error("ApperSDK not available. Please ensure the application is properly loaded.");
+        }
+      }
 
       const params = {
         fields: [

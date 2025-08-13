@@ -6,19 +6,31 @@ class ProfilesService {
     this.initializeApperClient();
   }
 
-  initializeApperClient() {
+initializeApperClient() {
     if (typeof window !== 'undefined' && window.ApperSDK) {
-      const { ApperClient } = window.ApperSDK;
-      this.apperClient = new ApperClient({
-        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
-        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
-      });
+      try {
+        const { ApperClient } = window.ApperSDK;
+        this.apperClient = new ApperClient({
+          apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+          apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+        });
+        return true;
+      } catch (error) {
+        console.error("Failed to initialize ApperClient:", error);
+        return false;
+      }
     }
+    return false;
   }
 
   async getAll() {
     try {
-      if (!this.apperClient) this.initializeApperClient();
+if (!this.apperClient) {
+        const initialized = this.initializeApperClient();
+        if (!initialized) {
+          throw new Error("ApperSDK not available. Please ensure the application is properly loaded.");
+        }
+      }
 
       const params = {
         fields: [
@@ -60,7 +72,12 @@ const profilesWithRules = await Promise.all(response.data.map(async (profile) =>
 
   async getRulesByProfile(profileId) {
     try {
-      if (!this.apperClient) this.initializeApperClient();
+if (!this.apperClient) {
+        const initialized = this.initializeApperClient();
+        if (!initialized) {
+          throw new Error("ApperSDK not available. Please ensure the application is properly loaded.");
+        }
+      }
 
       const params = {
         fields: [
@@ -135,7 +152,12 @@ category: response.data.category_c,
 
   async create(profile) {
     try {
-      if (!this.apperClient) this.initializeApperClient();
+if (!this.apperClient) {
+        const initialized = this.initializeApperClient();
+        if (!initialized) {
+          throw new Error("ApperSDK not available. Please ensure the application is properly loaded.");
+        }
+      }
 
       const params = {
         records: [
@@ -219,7 +241,12 @@ category: createdProfile.category_c,
 
   async update(id, profile) {
     try {
-      if (!this.apperClient) this.initializeApperClient();
+if (!this.apperClient) {
+        const initialized = this.initializeApperClient();
+        if (!initialized) {
+          throw new Error("ApperSDK not available. Please ensure the application is properly loaded.");
+        }
+      }
 
       const params = {
         records: [
@@ -297,7 +324,12 @@ Name: profile.name,
 
   async delete(id) {
     try {
-      if (!this.apperClient) this.initializeApperClient();
+if (!this.apperClient) {
+        const initialized = this.initializeApperClient();
+        if (!initialized) {
+          throw new Error("ApperSDK not available. Please ensure the application is properly loaded.");
+        }
+      }
 
       // Delete associated rules first
       await this.deleteRulesByProfile(id);

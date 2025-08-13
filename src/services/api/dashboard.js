@@ -1,5 +1,3 @@
-import React from "react";
-import Error from "@/components/ui/Error";
 class DashboardService {
   constructor() {
     this.apperClient = null;
@@ -23,7 +21,7 @@ class DashboardService {
     return false;
   }
 
-async getStats() {
+  async getStats() {
     try {
       if (!this.apperClient) {
         const initialized = this.initializeApperClient();
@@ -100,7 +98,6 @@ async getStats() {
       return [];
     }
   }
-
 async getUsageStats() {
     try {
       if (!this.apperClient) {

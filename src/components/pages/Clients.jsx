@@ -27,9 +27,9 @@ const Clients = () => {
   }, []);
 
   useEffect(() => {
-    const filtered = clients.filter(client =>
+const filtered = clients.filter(client =>
       client.Name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      client.email?.toLowerCase().includes(searchTerm.toLowerCase())
+      client.email_c?.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredClients(filtered);
   }, [clients, searchTerm]);
@@ -143,7 +143,7 @@ onChange={(e) => setSearchTerm(e.target.value)}
                   <h3 className="text-lg font-semibold text-gray-900 mb-1">
                     {client.Name}
                   </h3>
-                  <p className="text-gray-600 text-sm mb-2">{client.email}</p>
+<p className="text-gray-600 text-sm mb-2">{client.email_c}</p>
                   <div className="flex items-center space-x-4 text-sm text-gray-500">
                     <div className="flex items-center space-x-1">
                       <ApperIcon name="Coins" size={16} />

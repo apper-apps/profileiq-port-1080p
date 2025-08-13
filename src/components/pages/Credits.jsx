@@ -51,8 +51,8 @@ const Credits = () => {
     clients.forEach(client => {
       client.usage.forEach(usage => {
         transactions.push({
-          ...usage,
-          clientName: client.name,
+...usage,
+          clientName: client.Name,
           clientId: client.Id
         });
       });
@@ -175,7 +175,7 @@ const Credits = () => {
                 </div>
                 <div>
 <h4 className="font-medium text-gray-900">{client.Name}</h4>
-                  <p className="text-sm text-gray-500">{client.email}</p>
+<p className="text-sm text-gray-500">{client.email_c}</p>
                 </div>
               </div>
               
