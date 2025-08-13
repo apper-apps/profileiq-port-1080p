@@ -104,10 +104,8 @@ setQuestionnaires(prev =>
   if (loading) return <Loading />;
   if (error) return <Error message={error} onRetry={loadQuestionnaires} />;
 
-  if (showBuilder) {
-    const QuestionnaireBuilder = React.lazy(() => import("@/components/organisms/QuestionnaireBuilder"));
+if (showBuilder) {
     return (
-      <React.Suspense fallback={<Loading />}>
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
@@ -127,16 +125,15 @@ setQuestionnaires(prev =>
             </Button>
           </div>
           
-          <QuestionnaireBuilder
+<QuestionnaireBuilder
             questionnaireId={editingId}
             onSave={() => {
               setShowBuilder(false);
               loadQuestionnaires();
               toast.success(`Questionnaire ${editingId ? 'updated' : 'created'} successfully`);
-            }}
+}}
           />
         </div>
-      </React.Suspense>
     );
   }
 

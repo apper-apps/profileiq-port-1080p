@@ -122,10 +122,16 @@ if (!this.apperClient) {
           competencies: competencies
         };
       }));
-
-      return questionsWithDetails;
+return questionsWithDetails;
     } catch (error) {
       console.error("Error fetching questions:", error.message);
+      
+      // Throw network and API errors to allow proper error handling in UI
+      if (error.message.includes('Network Error') || error.message.includes('ApperSDK not available')) {
+        throw error;
+      }
+      
+      // Return empty array for other processing errors
       return [];
     }
   }
@@ -162,9 +168,16 @@ if (!this.apperClient) {
       return response.data.map(answer => ({
         value: answer.value_c,
         points: answer.points_c
-      }));
+}));
     } catch (error) {
       console.error("Error fetching answers:", error.message);
+      
+      // Throw network and API errors to allow proper error handling in UI
+      if (error.message.includes('Network Error') || error.message.includes('ApperSDK not available')) {
+        throw error;
+      }
+      
+      // Return empty array for other processing errors
       return [];
     }
   }
@@ -196,9 +209,16 @@ if (!this.apperClient) {
         return [];
       }
 
-      return response.data.map(comp => comp.Name);
+return response.data.map(comp => comp.Name);
     } catch (error) {
       console.error("Error fetching competencies:", error.message);
+      
+      // Throw network and API errors to allow proper error handling in UI
+      if (error.message.includes('Network Error') || error.message.includes('ApperSDK not available')) {
+        throw error;
+      }
+      
+      // Return empty array for other processing errors
       return [];
     }
   }
