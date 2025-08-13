@@ -12,6 +12,7 @@ const [profile, setProfile] = useState({
     name: "",
     category: "",
     description: "",
+    role: "",
     rules: []
   });
   const [showRuleForm, setShowRuleForm] = useState(false);
@@ -86,9 +87,16 @@ const [profile, setProfile] = useState({
     }));
   };
 
-  const categories = [
+const categories = [
     { value: "excellence", label: "Excellence" },
     { value: "critical", label: "Critical" }
+  ];
+
+  const roles = [
+    { value: "Admin", label: "Admin" },
+    { value: "User", label: "User" },
+    { value: "Editor", label: "Editor" },
+    { value: "Viewer", label: "Viewer" }
   ];
 
   const competencies = [
@@ -126,6 +134,13 @@ const [profile, setProfile] = useState({
             value={profile.category}
             onChange={(e) => setProfile(prev => ({ ...prev, category: e.target.value }))}
             options={categories}
+            required
+          />
+          <Select
+            label="Role"
+            value={profile.role}
+            onChange={(e) => setProfile(prev => ({ ...prev, role: e.target.value }))}
+            options={roles}
             required
           />
         </div>

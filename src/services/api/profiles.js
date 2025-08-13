@@ -23,9 +23,10 @@ class ProfilesService {
       const params = {
         fields: [
           { field: { Name: "Name" } },
-          { field: { Name: "category_c" } },
+{ field: { Name: "category_c" } },
           { field: { Name: "description_c" } },
           { field: { Name: "created_at_c" } },
+          { field: { Name: "role_c" } },
           { field: { Name: "CreatedOn" } }
         ]
       };
@@ -38,13 +39,14 @@ class ProfilesService {
       }
 
       // Get rules for each profile
-      const profilesWithRules = await Promise.all(response.data.map(async (profile) => {
+const profilesWithRules = await Promise.all(response.data.map(async (profile) => {
         const rules = await this.getRulesByProfile(profile.Id);
         return {
           ...profile,
           category: profile.category_c,
           description: profile.description_c,
           createdAt: profile.created_at_c || profile.CreatedOn,
+          role: profile.role_c,
           rules: rules
         };
       }));
@@ -100,10 +102,11 @@ class ProfilesService {
 
       const params = {
         fields: [
-          { field: { Name: "Name" } },
+{ field: { Name: "Name" } },
           { field: { Name: "category_c" } },
           { field: { Name: "description_c" } },
-          { field: { Name: "created_at_c" } }
+          { field: { Name: "created_at_c" } },
+          { field: { Name: "role_c" } }
         ]
       };
 
@@ -118,9 +121,10 @@ class ProfilesService {
 
       return {
         ...response.data,
-        category: response.data.category_c,
+category: response.data.category_c,
         description: response.data.description_c,
         createdAt: response.data.created_at_c,
+        role: response.data.role_c,
         rules: rules
       };
     } catch (error) {
@@ -136,10 +140,11 @@ class ProfilesService {
       const params = {
         records: [
           {
-            Name: profile.name,
+Name: profile.name,
             category_c: profile.category,
             description_c: profile.description,
-            created_at_c: new Date().toISOString()
+            created_at_c: new Date().toISOString(),
+            role_c: profile.role
           }
         ]
       };
@@ -175,9 +180,10 @@ class ProfilesService {
 
           return {
             ...createdProfile,
-            category: createdProfile.category_c,
+category: createdProfile.category_c,
             description: createdProfile.description_c,
             createdAt: createdProfile.created_at_c,
+            role: createdProfile.role_c,
             rules: profile.rules || []
           };
         }
@@ -219,9 +225,10 @@ class ProfilesService {
         records: [
           {
             Id: id,
-            Name: profile.name,
+Name: profile.name,
             category_c: profile.category,
-            description_c: profile.description
+            description_c: profile.description,
+            role_c: profile.role
           }
         ]
       };

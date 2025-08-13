@@ -1,25 +1,26 @@
-import React, { useState, useEffect } from "react";
-import Card from "@/components/atoms/Card";
-import Button from "@/components/atoms/Button";
+import React, { useEffect, useState } from "react";
+import { profilesService } from "@/services/api/profiles";
+import { format } from "date-fns";
+import { toast } from "react-toastify";
+import ApperIcon from "@/components/ApperIcon";
+import ProfileBuilder from "@/components/organisms/ProfileBuilder";
 import SearchBar from "@/components/molecules/SearchBar";
 import Loading from "@/components/ui/Loading";
 import Error from "@/components/ui/Error";
 import Empty from "@/components/ui/Empty";
-import ApperIcon from "@/components/ApperIcon";
-import { profilesService } from "@/services/api/profiles";
-import { format } from "date-fns";
-import { toast } from "react-toastify";
+import Button from "@/components/atoms/Button";
+import Card from "@/components/atoms/Card";
 
 const Profiles = () => {
-  const [profiles, setProfiles] = useState([]);
+const [profiles, setProfiles] = useState([]);
   const [filteredProfiles, setFilteredProfiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
+  const [roleFilter, setRoleFilter] = useState("all");
   const [showBuilder, setShowBuilder] = useState(false);
   const [editingId, setEditingId] = useState(null);
-
   useEffect(() => {
     loadProfiles();
   }, []);
@@ -28,7 +29,7 @@ const Profiles = () => {
     let filtered = profiles;
 
     // Filter by search term
-    if (searchTerm) {
+if (searchTerm) {
 filtered = filtered.filter(p =>
         p.Name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         p.description?.toLowerCase().includes(searchTerm.toLowerCase())
@@ -40,8 +41,13 @@ filtered = filtered.filter(p =>
       filtered = filtered.filter(p => p.category === categoryFilter);
     }
 
+    // Filter by role
+    if (roleFilter !== "all") {
+      filtered = filtered.filter(p => p.role === roleFilter);
+    }
+
     setFilteredProfiles(filtered);
-  }, [profiles, searchTerm, categoryFilter]);
+  }, [profiles, searchTerm, categoryFilter, roleFilter]);
 
   const loadProfiles = async () => {
     try {
@@ -159,26 +165,41 @@ const original = await profilesService.getById(id);
       </div>
 
       {/* Search and Filters */}
-      <div className="flex flex-col sm:flex-row gap-4">
+<div className="flex flex-col gap-4">
         <SearchBar
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search profiles..."
           className="flex-1"
         />
-        <div className="flex gap-2">
-          {["all", "excellence", "critical"].map((category) => (
-            <Button
-              key={category}
-              variant={categoryFilter === category ? "primary" : "secondary"}
-              size="sm"
-              onClick={() => setCategoryFilter(category)}
-              className="capitalize"
-            >
-              {category === "all" ? "All Categories" : category}
-            </Button>
-          ))}
-        </div>
+        <div className="flex flex-wrap gap-2">
+          <div className="flex gap-2">
+            {["all", "excellence", "critical"].map((category) => (
+              <Button
+                key={category}
+                variant={categoryFilter === category ? "primary" : "secondary"}
+                size="sm"
+                onClick={() => setCategoryFilter(category)}
+                className="capitalize"
+              >
+                {category === "all" ? "All Categories" : category}
+              </Button>
+            ))}
+          </div>
+          <div className="flex gap-2">
+            {["all", "Admin", "User", "Editor", "Viewer"].map((role) => (
+              <Button
+                key={role}
+                variant={roleFilter === role ? "primary" : "secondary"}
+                size="sm"
+                onClick={() => setRoleFilter(role)}
+                className="capitalize"
+              >
+                {role === "all" ? "All Roles" : role}
+              </Button>
+            ))}
+          </div>
+</div>
       </div>
 
       {/* Stats Summary */}
@@ -243,10 +264,18 @@ const original = await profilesService.getById(id);
 <h3 className="text-lg font-semibold text-gray-900">
                       {profile.Name}
                     </h3>
-                    <span className={`px-2 py-1 text-xs font-medium rounded-full flex items-center space-x-1 ${getCategoryColor(profile.category)}`}>
-                      <ApperIcon name={getCategoryIcon(profile.category)} size={12} />
-                      <span className="capitalize">{profile.category}</span>
-                    </span>
+                    <div className="flex gap-2">
+                      <span className={`px-2 py-1 text-xs font-medium rounded-full flex items-center space-x-1 ${getCategoryColor(profile.category)}`}>
+                        <ApperIcon name={getCategoryIcon(profile.category)} size={12} />
+                        <span className="capitalize">{profile.category}</span>
+                      </span>
+                      {profile.role && (
+                        <span className="px-2 py-1 text-xs font-medium rounded-full flex items-center space-x-1 bg-blue-100 text-blue-800">
+                          <ApperIcon name="Shield" size={12} />
+                          <span>{profile.role}</span>
+                        </span>
+                      )}
+                    </div>
                   </div>
                   <p className="text-gray-600 text-sm mb-3 line-clamp-2">
                     {profile.description}
