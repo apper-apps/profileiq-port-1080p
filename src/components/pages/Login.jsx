@@ -8,15 +8,15 @@ import Input from "@/components/atoms/Input";
 function Login() {
   const { isInitialized } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    email: "",
-    password: ""
-  });
   const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
   
   useEffect(() => {
     if (isInitialized) {
-      // Show login UI in this component
+      // Show Italian login UI in this component
       const { ApperUI } = window.ApperSDK;
       ApperUI.showLogin("#authentication");
     }
@@ -32,12 +32,10 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
     try {
-      // Handle form submission logic here
+      // Handle login logic here
       console.log('Login attempt:', formData);
-      // Navigate on success
-      // navigate('/dashboard');
+      // navigate to dashboard or appropriate page
     } catch (error) {
       console.error('Login failed:', error);
     } finally {
@@ -55,7 +53,7 @@ function Login() {
           <p className="text-gray-600">Accedi al tuo account</p>
         </div>
 
-        <Card className="p-8 shadow-xl bg-white/80 backdrop-blur-sm">
+<Card className="p-8 shadow-xl bg-white/80 backdrop-blur-sm">
           <div id="authentication" />
           <form onSubmit={handleSubmit} className="space-y-6">
             <Input
