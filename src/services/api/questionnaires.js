@@ -8,22 +8,34 @@ class QuestionnairesService {
     this.initializeApperClient();
   }
 
-  initializeApperClient() {
-    if (typeof window !== 'undefined' && window.ApperSDK) {
-      const { ApperClient } = window.ApperSDK;
-      this.apperClient = new ApperClient({
-        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
-        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
-      });
+async initializeApperClient() {
+    if (typeof window !== 'undefined') {
+      // Wait a bit for SDK to load if it's not immediately available
+      let attempts = 0;
+      const maxAttempts = 10;
+      
+      while (attempts < maxAttempts && !window.ApperSDK) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+        attempts++;
+      }
+      
+      if (window.ApperSDK) {
+        const { ApperClient } = window.ApperSDK;
+        this.apperClient = new ApperClient({
+          apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+          apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+        });
+      }
     }
   }
 
 async getAll() {
     try {
-      if (!this.apperClient) {
-        this.initializeApperClient();
+if (!this.apperClient) {
+        await this.initializeApperClient();
         if (!this.apperClient) {
-          throw new Error('Failed to initialize Apper client');
+          console.warn('Apper SDK not available, falling back to mock data');
+          return [];
         }
       }
       const params = {
