@@ -169,13 +169,12 @@ onChange={(e) => setSearchTerm(e.target.value)}
 <span className="text-sm font-medium">
                       {client.credits > 100 ? "Buono" : client.credits > 20 ? "Basso" : "Critico"}
                     </span>
-                    <span className="text-lg font-bold ml-2">{client.credits}</span>
+<span className="text-lg font-bold ml-2">{client.credits}</span>
                   </div>
                 </div>
-              </div>
 
               {/* Recent Usage */}
-<div className="mb-4">
+              <div className="mb-4">
                 <h4 className="text-sm font-medium text-gray-700 mb-2">Attività Recente</h4>
                 <div className="space-y-2 max-h-32 overflow-y-auto">
                   {client.usage.slice(0, 3).map((usage) => (
@@ -223,13 +222,12 @@ onChange={(e) => setSearchTerm(e.target.value)}
                   size="sm"
                   icon="Eye"
                   className="flex-1"
->
+className="flex-1"
+                >
                   Visualizza Dettagli
                 </Button>
-              </div>
             </Card>
           ))}
-        </div>
       )}
 
       {/* Add Credits Modal */}
