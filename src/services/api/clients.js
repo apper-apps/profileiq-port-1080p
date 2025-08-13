@@ -19,12 +19,23 @@ class ClientsService {
     return { ...item };
   }
 
-  async create(client) {
+async create(client) {
     await new Promise(resolve => setTimeout(resolve, 400));
     const newId = Math.max(0, ...this.data.map(item => item.Id)) + 1;
+    
+    // Generate brand slug for URL
+    const brandSlug = client.brand.toLowerCase()
+      .replace(/[^a-z0-9]/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
+    
     const newClient = {
       ...client,
       Id: newId,
+      brandSlug: brandSlug,
+      customUrl: `talentscanner.app/${brandSlug}/questionario`,
+      credits: 100, // Starting credits
+      usage: [],
       createdAt: new Date().toISOString(),
       apiKey: this.generateApiKey()
     };

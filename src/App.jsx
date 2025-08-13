@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import Login from "@/components/pages/Login";
+import Register from "@/components/pages/Register";
 
 // Layout
 import Layout from "@/components/pages/Layout";
@@ -18,6 +20,8 @@ const App = () => {
     <BrowserRouter>
       <div className="App">
         <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/" element={<Layout />}>
             <Route index element={<Dashboard />} />
             <Route path="questionnaires" element={<Questionnaires />} />

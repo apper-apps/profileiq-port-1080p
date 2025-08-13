@@ -23,8 +23,8 @@ const Sidebar = ({ isOpen, onClose }) => {
             <ApperIcon name="Brain" size={24} className="text-white" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-gray-900">ProfileIQ</h1>
-            <p className="text-xs text-gray-500">Behavioral Analytics</p>
+<h1 className="text-xl font-bold text-gray-900">Talent Scanner</h1>
+            <p className="text-xs text-gray-500">Analisi Comportamentale</p>
           </div>
         </div>
       </div>

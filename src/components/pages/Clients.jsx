@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import Card from "@/components/atoms/Card";
-import Button from "@/components/atoms/Button";
-import Input from "@/components/atoms/Input";
+import React, { useEffect, useState } from "react";
+import { clientsService } from "@/services/api/clients";
+import { format } from "date-fns";
+import { toast } from "react-toastify";
+import ApperIcon from "@/components/ApperIcon";
 import SearchBar from "@/components/molecules/SearchBar";
 import Loading from "@/components/ui/Loading";
 import Error from "@/components/ui/Error";
 import Empty from "@/components/ui/Empty";
-import ApperIcon from "@/components/ApperIcon";
-import { clientsService } from "@/services/api/clients";
-import { format } from "date-fns";
-import { toast } from "react-toastify";
+import Button from "@/components/atoms/Button";
+import Card from "@/components/atoms/Card";
+import Input from "@/components/atoms/Input";
 
 const Clients = () => {
   const [clients, setClients] = useState([]);
@@ -47,15 +47,15 @@ const Clients = () => {
     }
   };
 
-  const handleAddCredits = async () => {
+const handleAddCredits = async () => {
     if (!creditsForm.amount || !creditsForm.reason.trim()) {
-      toast.error("Please fill in all fields");
+      toast.error("Compila tutti i campi");
       return;
     }
 
-    const amount = parseInt(creditsForm.amount);
+const amount = parseInt(creditsForm.amount);
     if (amount <= 0) {
-      toast.error("Amount must be greater than 0");
+      toast.error("L'importo deve essere maggiore di 0");
       return;
     }
 
@@ -68,9 +68,9 @@ const Clients = () => {
       setShowAddCredits(false);
       setCreditsForm({ amount: "", reason: "" });
       setSelectedClient(null);
-      toast.success(`${amount} credits added successfully`);
+toast.success(`${amount} crediti aggiunti con successo`);
     } catch (error) {
-      toast.error("Failed to add credits");
+      toast.error("Errore nell'aggiungere i crediti");
     } finally {
       setAddingCredits(false);
     }
@@ -114,24 +114,24 @@ const Clients = () => {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Client Management</h1>
-          <p className="text-gray-600">Manage client accounts and credit usage</p>
+<div>
+          <h1 className="text-2xl font-bold text-gray-900">Gestione Clienti</h1>
+          <p className="text-gray-600">Gestisci gli account clienti e l'utilizzo dei crediti</p>
         </div>
       </div>
 
       {/* Search */}
       <SearchBar
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Search clients..."
+onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Cerca clienti..."
       />
 
       {/* Clients List */}
       {filteredClients.length === 0 ? (
-        <Empty
-          title="No clients found"
-          description="Client accounts will appear here once they are created."
+<Empty
+          title="Nessun cliente trovato"
+          description="Gli account clienti appariranno qui una volta creati."
           icon="Building2"
         />
       ) : (
@@ -146,8 +146,8 @@ const Clients = () => {
                   <p className="text-gray-600 text-sm mb-2">{client.email}</p>
                   <div className="flex items-center space-x-4 text-sm text-gray-500">
                     <div className="flex items-center space-x-1">
-                      <ApperIcon name="Coins" size={16} />
-                      <span>{client.credits} credits</span>
+<ApperIcon name="Coins" size={16} />
+                      <span>{client.credits} crediti</span>
                     </div>
                     <div className="flex items-center space-x-1">
                       <ApperIcon name="Calendar" size={16} />
@@ -166,18 +166,17 @@ const Clients = () => {
                     ? "bg-yellow-100 text-yellow-800" 
                     : "bg-red-100 text-red-800"
                 }`}>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">
-                      {client.credits > 100 ? "Good" : client.credits > 20 ? "Low" : "Critical"}
+<span className="text-sm font-medium">
+                      {client.credits > 100 ? "Buono" : client.credits > 20 ? "Basso" : "Critico"}
                     </span>
-                    <span className="text-lg font-bold">{client.credits}</span>
+                    <span className="text-lg font-bold ml-2">{client.credits}</span>
                   </div>
                 </div>
               </div>
 
               {/* Recent Usage */}
-              <div className="mb-4">
-                <h4 className="text-sm font-medium text-gray-700 mb-2">Recent Activity</h4>
+<div className="mb-4">
+                <h4 className="text-sm font-medium text-gray-700 mb-2">Attività Recente</h4>
                 <div className="space-y-2 max-h-32 overflow-y-auto">
                   {client.usage.slice(0, 3).map((usage) => (
                     <div key={usage.Id} className="flex items-start space-x-2 text-xs">
@@ -199,8 +198,8 @@ const Clients = () => {
                       </div>
                     </div>
                   ))}
-                  {client.usage.length === 0 && (
-                    <p className="text-xs text-gray-500 text-center py-2">No activity yet</p>
+{client.usage.length === 0 && (
+                    <p className="text-xs text-gray-500 text-center py-2">Nessuna attività ancora</p>
                   )}
                 </div>
               </div>
@@ -216,16 +215,16 @@ const Clients = () => {
                     setShowAddCredits(true);
                   }}
                   className="flex-1"
-                >
-                  Add Credits
+>
+                  Aggiungi Crediti
                 </Button>
                 <Button
                   variant="ghost"
                   size="sm"
                   icon="Eye"
                   className="flex-1"
-                >
-                  View Details
+>
+                  Visualizza Dettagli
                 </Button>
               </div>
             </Card>
@@ -239,8 +238,8 @@ const Clients = () => {
           <Card className="w-full max-w-md">
             <div className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900">
-                  Add Credits
+<h3 className="text-lg font-semibold text-gray-900">
+                  Aggiungi Crediti
                 </h3>
                 <Button
                   variant="ghost"
@@ -257,31 +256,31 @@ const Clients = () => {
               <div className="mb-4 p-4 bg-gray-50 rounded-lg">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="font-medium text-gray-900">{selectedClient.name}</p>
-                    <p className="text-sm text-gray-600">Current balance: {selectedClient.credits} credits</p>
+<p className="font-medium text-gray-900">{selectedClient.name}</p>
+                    <p className="text-sm text-gray-600">Saldo attuale: {selectedClient.credits} crediti</p>
                   </div>
                 </div>
               </div>
 
               <div className="space-y-4">
-                <Input
-                  label="Credits to Add"
+<Input
+                  label="Crediti da Aggiungere"
                   type="number"
                   min="1"
                   value={creditsForm.amount}
                   onChange={(e) => setCreditsForm(prev => ({ ...prev, amount: e.target.value }))}
-                  placeholder="Enter amount"
+                  placeholder="Inserisci importo"
                   required
                 />
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Reason
+<label className="block text-sm font-medium text-gray-700 mb-2">
+                    Motivo
                   </label>
                   <textarea
                     value={creditsForm.reason}
-                    onChange={(e) => setCreditsForm(prev => ({ ...prev, reason: e.target.value }))}
-                    placeholder="Enter reason for credit addition..."
+onChange={(e) => setCreditsForm(prev => ({ ...prev, reason: e.target.value }))}
+                    placeholder="Inserisci il motivo per l'aggiunta di crediti..."
                     rows={3}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
                   />
@@ -296,14 +295,14 @@ const Clients = () => {
                     setCreditsForm({ amount: "", reason: "" });
                     setSelectedClient(null);
                   }}
-                >
-                  Cancel
+>
+                  Annulla
                 </Button>
                 <Button
                   onClick={handleAddCredits}
                   loading={addingCredits}
-                >
-                  Add Credits
+>
+                  Aggiungi Crediti
                 </Button>
               </div>
             </div>
