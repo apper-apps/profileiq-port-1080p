@@ -123,8 +123,25 @@ if (!this.apperClient) {
         };
       }));
 return questionsWithDetails;
-    } catch (error) {
+} catch (error) {
       console.error("Error fetching questions:", error.message);
+      
+      // Check if ApperSDK is available before making API calls
+      if (!window.ApperSDK) {
+        const sdkError = new Error("ApperSDK not available - ensure script is loaded");
+        console.error("ApperSDK initialization failed:", sdkError.message);
+        throw sdkError;
+}
+      
+      // Initialize client if not already done
+      if (!this.apperClient) {
+        try {
+          await this.initializeApperClient();
+        } catch (initError) {
+          console.error("Failed to initialize ApperClient:", initError.message);
+          throw new Error("ApperClient initialization failed: " + initError.message);
+        }
+      }
       
       // Throw network and API errors to allow proper error handling in UI
       if (error.message.includes('Network Error') || error.message.includes('ApperSDK not available')) {
@@ -170,7 +187,23 @@ if (!this.apperClient) {
         points: answer.points_c
 }));
     } catch (error) {
-      console.error("Error fetching answers:", error.message);
+console.error("Error fetching answers:", error.message);
+      
+      // Check if ApperSDK is available before making API calls
+      if (!window.ApperSDK) {
+        const sdkError = new Error("ApperSDK not available - ensure script is loaded");
+        console.error("ApperSDK initialization failed:", sdkError.message);
+        throw sdkError;
+      }
+// Initialize client if not already done
+      if (!this.apperClient) {
+        try {
+          await this.initializeApperClient();
+        } catch (initError) {
+          console.error("Failed to initialize ApperClient:", initError.message);
+          throw new Error("ApperClient initialization failed: " + initError.message);
+        }
+      }
       
       // Throw network and API errors to allow proper error handling in UI
       if (error.message.includes('Network Error') || error.message.includes('ApperSDK not available')) {
@@ -212,6 +245,21 @@ if (!this.apperClient) {
 return response.data.map(comp => comp.Name);
     } catch (error) {
       console.error("Error fetching competencies:", error.message);
+// Check if ApperSDK is available before making API calls
+      if (!window.ApperSDK) {
+        const sdkError = new Error("ApperSDK not available - ensure script is loaded");
+        console.error("ApperSDK initialization failed:", sdkError.message);
+        throw sdkError;
+      }
+// Initialize client if not already done
+      if (!this.apperClient) {
+        try {
+          await this.initializeApperClient();
+        } catch (initError) {
+          console.error("Failed to initialize ApperClient:", initError.message);
+          throw new Error("ApperClient initialization failed: " + initError.message);
+        }
+      }
       
       // Throw network and API errors to allow proper error handling in UI
       if (error.message.includes('Network Error') || error.message.includes('ApperSDK not available')) {
