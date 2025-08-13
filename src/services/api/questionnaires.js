@@ -78,10 +78,10 @@ if (!this.apperClient) {
 
 async getQuestionsByQuestionnaire(questionnaireId) {
     try {
-      if (!this.apperClient) {
-        this.initializeApperClient();
+if (!this.apperClient) {
+        await this.initializeApperClient();
         if (!this.apperClient) {
-          throw new Error('Failed to initialize Apper client');
+          throw new Error('ApperSDK not available. Please ensure the SDK is loaded.');
         }
       }
       const params = {
@@ -132,10 +132,10 @@ async getQuestionsByQuestionnaire(questionnaireId) {
 
 async getAnswersByQuestion(questionId) {
     try {
-      if (!this.apperClient) {
-        this.initializeApperClient();
+if (!this.apperClient) {
+        await this.initializeApperClient();
         if (!this.apperClient) {
-          throw new Error('Failed to initialize Apper client');
+          throw new Error('ApperSDK not available. Please ensure the SDK is loaded.');
         }
       }
 
@@ -171,10 +171,10 @@ async getAnswersByQuestion(questionId) {
 
 async getCompetenciesByQuestion(questionId) {
     try {
-      if (!this.apperClient) {
-        this.initializeApperClient();
+if (!this.apperClient) {
+        await this.initializeApperClient();
         if (!this.apperClient) {
-          throw new Error('Failed to initialize Apper client');
+          throw new Error('ApperSDK not available. Please ensure the SDK is loaded.');
         }
       }
       const params = {
@@ -205,10 +205,10 @@ async getCompetenciesByQuestion(questionId) {
 
 async getById(id) {
     try {
-      if (!this.apperClient) {
-        this.initializeApperClient();
+if (!this.apperClient) {
+        await this.initializeApperClient();
         if (!this.apperClient) {
-          throw new Error('Failed to initialize Apper client');
+          throw new Error('ApperSDK not available. Please ensure the SDK is loaded.');
         }
       }
       const params = {
@@ -246,10 +246,10 @@ async getById(id) {
 
 async create(questionnaire) {
     try {
-      if (!this.apperClient) {
-        this.initializeApperClient();
+if (!this.apperClient) {
+        await this.initializeApperClient();
         if (!this.apperClient) {
-          throw new Error('Failed to initialize Apper client');
+          throw new Error('ApperSDK not available. Please ensure the SDK is loaded.');
         }
       }
 
@@ -313,10 +313,10 @@ async create(questionnaire) {
   }
 async createQuestions(questionnaireId, questions) {
     try {
-      if (!this.apperClient) {
-        this.initializeApperClient();
+if (!this.apperClient) {
+        await this.initializeApperClient();
         if (!this.apperClient) {
-          throw new Error('Failed to initialize Apper client');
+          throw new Error('ApperSDK not available. Please ensure the SDK is loaded.');
         }
       }
       
@@ -393,10 +393,10 @@ async createQuestions(questionnaireId, questions) {
 
 async update(id, questionnaire) {
     try {
-      if (!this.apperClient) {
-        this.initializeApperClient();
+if (!this.apperClient) {
+        await this.initializeApperClient();
         if (!this.apperClient) {
-          throw new Error('Failed to initialize Apper client');
+          throw new Error('ApperSDK not available. Please ensure the SDK is loaded.');
         }
       }
       const params = {
@@ -432,10 +432,10 @@ async update(id, questionnaire) {
 
 async updateQuestions(questionnaireId, questions) {
     try {
-      if (!this.apperClient) {
-        this.initializeApperClient();
+if (!this.apperClient) {
+        await this.initializeApperClient();
         if (!this.apperClient) {
-          throw new Error('Failed to initialize Apper client');
+          throw new Error('ApperSDK not available. Please ensure the SDK is loaded.');
         }
       }
       // Delete existing questions and related data
@@ -453,9 +453,9 @@ async updateQuestions(questionnaireId, questions) {
 async deleteQuestionsByQuestionnaire(questionnaireId) {
     try {
       if (!this.apperClient) {
-        this.initializeApperClient();
+await this.initializeApperClient();
         if (!this.apperClient) {
-          throw new Error('Failed to initialize Apper client');
+          throw new Error('ApperSDK not available. Please ensure the SDK is loaded.');
         }
       }
       // Get all question IDs for this questionnaire
@@ -495,10 +495,10 @@ async deleteQuestionsByQuestionnaire(questionnaireId) {
 
 async deleteAnswersByQuestion(questionId) {
     try {
-      if (!this.apperClient) {
-        this.initializeApperClient();
+if (!this.apperClient) {
+        await this.initializeApperClient();
         if (!this.apperClient) {
-          throw new Error('Failed to initialize Apper client');
+          throw new Error('ApperSDK not available. Please ensure the SDK is loaded.');
         }
       }
       const params = {
@@ -529,10 +529,10 @@ async deleteAnswersByQuestion(questionId) {
 
 async deleteCompetenciesByQuestion(questionId) {
     try {
-      if (!this.apperClient) {
-        this.initializeApperClient();
+if (!this.apperClient) {
+        await this.initializeApperClient();
         if (!this.apperClient) {
-          throw new Error('Failed to initialize Apper client');
+          throw new Error('ApperSDK not available. Please ensure the SDK is loaded.');
         }
       }
       const params = {
@@ -563,10 +563,10 @@ async deleteCompetenciesByQuestion(questionId) {
 
 async delete(id) {
     try {
-      if (!this.apperClient) {
-        this.initializeApperClient();
+if (!this.apperClient) {
+        await this.initializeApperClient();
         if (!this.apperClient) {
-          throw new Error('Failed to initialize Apper client');
+          throw new Error('ApperSDK not available. Please ensure the SDK is loaded.');
         }
       }
       // Delete associated questions and related data first
