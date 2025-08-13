@@ -34,7 +34,7 @@ function AppContent() {
   const isAuthenticated = userState?.isAuthenticated || false;
   
   // Initialize ApperUI once when the app loads
-  useEffect(() => {
+useEffect(() => {
     const { ApperClient, ApperUI } = window.ApperSDK;
     
     const client = new ApperClient({
